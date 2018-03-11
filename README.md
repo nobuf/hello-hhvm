@@ -70,3 +70,11 @@ curl -v http://localhost:8080/nobuf
 ```
 
 Alright, it's working!
+
+```shell
+hhvm -v Eval.Jit=false vendor/bin/phpunit
+```
+
+Without option, phpunit runs painfully slow.
+
+[Documentation has a section](https://docs.hhvm.com/hack/tools/hackificator) for `hackificator`, but apparently `brew` [doesn't include this tool](https://github.com/hhvm/homebrew-hhvm/issues/19).

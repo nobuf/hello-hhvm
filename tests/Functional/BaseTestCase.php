@@ -1,4 +1,4 @@
-<?php
+<?hh
 
 namespace Tests\Functional;
 
@@ -30,7 +30,7 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @param array|object|null $requestData the request data
      * @return \Slim\Http\Response
      */
-    public function runApp($requestMethod, $requestUri, $requestData = null)
+    public function runApp(string $requestMethod, string $requestUri, $requestData = null): Response
     {
         // Create a mock environment for testing with
         $environment = Environment::mock(
