@@ -9,10 +9,16 @@ class HomepageTest extends BaseTestCase
      */
     public function testGetHomepageWithoutName()
     {
-        $response = $this->runApp('GET', '/');
+        $response = $this->runAppWithDefaultToken('GET', '/');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('YO!', (string)$response->getBody());
+    }
+
+    public function testGetHomepageWithInvalidToken()
+    {
+        $response = $this->runApp('GET', '/', null, 'invalid-token');
+        $this->assertEquals(401, $response->getStatusCode());
     }
 
     /**
@@ -20,7 +26,7 @@ class HomepageTest extends BaseTestCase
      */
     public function testGetHomepageWithGreeting()
     {
-        $response = $this->runApp('GET', '/name');
+        $response = $this->runAppWithDefaultToken('GET', '/name');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('YO, name!', (string)$response->getBody());
@@ -31,7 +37,7 @@ class HomepageTest extends BaseTestCase
      */
     public function testPostHomepageNotAllowed()
     {
-        $response = $this->runApp('POST', '/', ['test']);
+        $response = $this->runAppWithDefaultToken('POST', '/', ['test']);
 
         $this->assertEquals(405, $response->getStatusCode());
         $this->assertContains('Method not allowed', (string)$response->getBody());

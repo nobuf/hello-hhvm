@@ -78,3 +78,19 @@ hhvm -v Eval.Jit=false vendor/bin/phpunit
 Without option, phpunit runs painfully slow.
 
 [Documentation has a section](https://docs.hhvm.com/hack/tools/hackificator) for `hackificator`, but apparently `brew` [doesn't include this tool](https://github.com/hhvm/homebrew-hhvm/issues/19).
+
+
+
+```shell
+composer require tuupola/slim-jwt-auth "^2.0"
+```
+
+The latest version of this library requires php7.1. And, HHVM would get an error at:
+
+```
+Fatal error: syntax error, unexpected '|', expecting T_VARIABLE
+```
+
+> In PHP 7.1 and later, a [*catch*](http://php.net/manual/en/language.exceptions.php#language.exceptions.catch) block may specify multiple exceptions using the pipe (*|*) character.
+
+So, there are compatibility issues.

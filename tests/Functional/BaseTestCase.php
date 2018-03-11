@@ -22,6 +22,22 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      */
     protected $withMiddleware = true;
 
+    protected static $token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik5vYnUgRiIsImlhdCI6MTUxNjIzOTAyMn0.eXYGYY-pwgVqyVM9VYTqjZwCDwAG4ZlVf5Hn-Ir5m3Q';
+
+    protected static $tokenAsArray = [
+        'sub' => '1234567890',
+        'name' => 'Nobu F',
+        'iat' => 1516239022,
+    ];
+
+    public function runAppWithDefaultToken(
+        string $requestMethod,
+        string $requestUri,
+        $requestData = null
+    ) {
+        return $this->runApp($requestMethod, $requestUri, $requestData, self::$token);
+    }
+
     /**
      * Process the application given a request method and URI
      *
@@ -30,13 +46,18 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @param array|object|null $requestData the request data
      * @return \Slim\Http\Response
      */
-    public function runApp(string $requestMethod, string $requestUri, $requestData = null): Response
-    {
+    public function runApp(
+        string $requestMethod,
+        string $requestUri,
+        $requestData = null,
+        $token = null
+    ): Response {
         // Create a mock environment for testing with
         $environment = Environment::mock(
             [
                 'REQUEST_METHOD' => $requestMethod,
-                'REQUEST_URI' => $requestUri
+                'REQUEST_URI' => $requestUri,
+                'HTTP_AUTHORIZATION' => 'Bearer ' . $token,
             ]
         );
 
