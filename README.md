@@ -94,3 +94,13 @@ Fatal error: syntax error, unexpected '|', expecting T_VARIABLE
 > In PHP 7.1 and later, a [*catch*](http://php.net/manual/en/language.exceptions.php#language.exceptions.catch) block may specify multiple exceptions using the pipe (*|*) character.
 
 So, there are compatibility issues.
+
+
+
+Vanilla php7 doesn't provide `async/await` yet. One endpoint might require communicating with multiple databases and http APIs, if that's the case, Hack has an advantage.
+
+[Null Safe](https://docs.hhvm.com/hack/operators/null-safe) and [Placeholder Variable](https://docs.hhvm.com/hack/other-features/placeholder-variable) caught my eyes, and they look like welcomed features.
+
+For 99% of php5 users, it'd be better to switch to php7 because of its larger community size, though 1% might want to think twice. If their stack is similar to Facebook or Slack (no framework, MySQL), running benchmark on their code base might be worth it.
+
+No PhpStorm support could be a deal breaker while it is a great IDE out of the box, and code search/refactoring work well on large code repository.
